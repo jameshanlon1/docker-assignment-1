@@ -15,12 +15,13 @@ services:
       MONGO_PASS: secret
       MONGO_HOST: mongodb
       MONGODB_URI: mongodb://admin:secret@mongodb:27017
-      REDIS_URI: redis://mongodb
-      ENABLE_WRITING_HANDLERS: = false
+      REDIS_URI: redis://redis
+      ENABLE_WRITING_HANDLERS: "false"  # Corrected value format
     networks:
       - assignment-network
     depends_on:
       - mongodb
+      - redis
 
   mongodb:
     container_name: mongoDB
@@ -31,7 +32,7 @@ services:
     networks:
       - assignment-network
     volumes:
-      - ./mongodb-data:/data/db  # Changed volume name for mongodb
+      - ./mongodb-data:/data/db
 
   redis:
     image: redis:alpine
@@ -39,7 +40,7 @@ services:
     ports:
       - "6379:6379"
     volumes:
-      - ./redis-data:/data  # Changed volume name and target directory for Redis
+      - ./redis-data:/data
     networks:
       - assignment-network
 
@@ -50,7 +51,7 @@ services:
     ports:
       - 8080:8081
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: admin  # Corrected environment variable names
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
       ME_CONFIG_MONGODB_ADMINPASSWORD: secret
       ME_CONFIG_MONGODB_SERVER: mongodb
     networks:
