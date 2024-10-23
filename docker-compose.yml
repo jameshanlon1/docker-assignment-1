@@ -32,7 +32,19 @@ services:
     networks:
       - assignment-network
     volumes:
-      - ./mongodb-data:/data/db
+      - ./moviesData:/data/db
+
+  seeding:
+    image: mongo:8.0-rc
+    container_name: seeding
+    depends_on:
+      - mongodb
+    volumes:
+      - ./assignment1/mongodb-init
+    links:
+      - mongodb
+    command:
+      mongoimport --host mongodb --db tmdb_movies --collection movies --authenticationDatabase admin --username $MONGODB_USERNAME --password $MONGODB_PASSWORD --drop --jsonArray --file /mongodb-init/seeding.json
 
   redis:
     image: redis:alpine
