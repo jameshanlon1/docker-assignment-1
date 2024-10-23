@@ -40,7 +40,7 @@ services:
     depends_on:
       - mongodb
     volumes:
-      - ./assignment1/mongodb-init
+      - ./assignment1:/mongodb-init
     links:
       - mongodb
     command:
