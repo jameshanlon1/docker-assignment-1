@@ -1,4 +1,3 @@
-version: '3'
 networks:
   assignment-network:
     external: true
@@ -40,11 +39,16 @@ services:
     depends_on:
       - mongodb
     volumes:
-      - ./assignment1:/mongodb-init
+      - ./seeding.json:/seed.json
+    networks:
+      - assignment-network
     links:
       - mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: secret
     command:
-      mongoimport --host mongodb --db tmdb_movies --collection movies --authenticationDatabase admin --username $MONGODB_USERNAME --password $MONGODB_PASSWORD --drop --jsonArray --file /mongodb-init/seeding.json
+      mongoimport --host mongodb --db tmdb_movies --collection movies --authenticationDatabase admin --username ${MONGO_INITDB_ROOT_USERNAME} --password ${MONGO_INITDB_ROOT_PASSWORD} --drop --jsonArray --file /seed.json
 
   redis:
     image: redis:alpine
@@ -72,5 +76,5 @@ services:
       - mongodb
 
 volumes:
-  mongodb-data:
+  moviesData:
   redis-data:
