@@ -57,6 +57,9 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: secret
     command:
       mongoimport --host mongodb --db tmdb_movies --collection movies --authenticationDatabase admin --username ${MONGO_INITDB_ROOT_USERNAME} --password ${MONGO_INITDB_ROOT_PASSWORD} --drop --jsonArray --file /seed.json
+    profiles:
+      - dev
+
 
   redis:
     image: redis:alpine
@@ -80,8 +83,10 @@ services:
       ME_CONFIG_MONGODB_SERVER: mongodb
     networks:
       - mongodb-network
-    depends_on:
-      - mongodb
+    # depends_on:
+    #   - mongodb
+    profiles:
+      - dev
 
 volumes:
   moviesData:
