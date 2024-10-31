@@ -1,3 +1,3 @@
 ## Agile Software Practice - Assignment 1.
 
-## tesing git hub commits
+### A Docker Compose configuration to run a Movies API with MongoDB, Redis, and optional development tools.
