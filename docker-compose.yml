@@ -21,7 +21,7 @@ services:
       MONGO_HOST: mongodb
       MONGODB_URI: mongodb://admin:secret@mongodb:27017
       REDIS_URI: redis://redis
-      ENABLE_WRITING_HANDLERS: "false"  # Corrected value format
+      ENABLE_WRITING_HANDLERS: "false"
     networks:
       - mongodb-network
       - redis-network
@@ -83,8 +83,8 @@ services:
       ME_CONFIG_MONGODB_SERVER: mongodb
     networks:
       - mongodb-network
-    # depends_on:
-    #   - mongodb
+    depends_on:
+      - mongodb
     profiles:
       - dev
 
