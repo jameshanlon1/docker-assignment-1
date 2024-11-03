@@ -43,18 +43,3 @@ Setting up the development and production stack options was easier than I expect
 
 ---
 
-
-
-
-
-## Agile Software Practice - Assignment 1.
-
-### A Docker Compose configuration to run a Movies API with MongoDB, Redis, and optional development tools.
-
-### First I looked at the liist of services that are involoved in the assignment.
-
-### -I downloaed and opned the movies-api from the link provided. I set up the yaml file with help for the weeks pervious labs. I created the 4 services for the API to work properly. The movies api that is accessed on port 9000, mongoDB database for storing movie data, redis for optimized data access, and mongo-express for web based GUI on port 8000.
-
-### I used the information given to us in the assignment sheet to set the enviornment variables rewuired by the moies-api. I also set the enviornment variables for MongoDB and Mongo Express so that containter isolation could be satisfied. I did this by creating 3 differnt networks and assigning them to the correct service so they would still be accessible from container to container.
-
-### For the seeding i set the volume to use the seeding.json file and add a seed.json file which is what i used to isert the array into. 
